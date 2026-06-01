@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Georgios N. Tsaousis — Bioinformatics Group Leader, Clinical Genomics Researcher, and Lecturer specialising in NGS, precision oncology, and translational genomics.">
+<title>Georgios N. Tsaousis | Clinical Genomics & Bioinformatics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #0d1117;
+    --ink-soft: #374151;
+    --ink-muted: #6b7280;
+    --cream: #f7f6f2;
+    --cream-warm: #f0ede6;
+    --teal: #1a6b6b;
+    --teal-light: #2a9090;
+    --teal-pale: #d4ecec;
+    --teal-mid: #c0e0e0;
+    --gold: #b5873a;
+    --gold-pale: #f5ecd8;
+    --rule: rgba(13,17,23,0.1);
+    --white: #ffffff;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; font-weight: 300; background: var(--cream); color: var(--ink); overflow-x: hidden; font-size: 15.5px; line-height: 1.7; }
+
+  /* ── NAV ── */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1rem 2.8rem; background: rgba(247,246,242,0.94); backdrop-filter: blur(16px); border-bottom: 1px solid var(--rule); animation: fadeDown 0.7s ease both; }
+  .nav-logo { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; letter-spacing: 0.01em; color: var(--ink); text-decoration: none; }
+  .nav-logo span { color: var(--teal); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-family: 'JetBrains Mono', monospace; font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--teal); }
+  .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--ink); transition: all 0.3s; }
+
+  /* ── HERO ── */
+  .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding: 0 2.8rem; padding-top: 4.5rem; position: relative; overflow: hidden; gap: 4rem; }
+  .hero-mesh { position: absolute; top: 0; right: 0; width: 60%; height: 100%; background: radial-gradient(ellipse at 70% 30%, rgba(26,107,107,0.08) 0%, transparent 60%), radial-gradient(ellipse at 90% 80%, rgba(181,135,58,0.06) 0%, transparent 50%); pointer-events: none; }
+  .hero-grid-bg { position: absolute; inset: 0; background-image: linear-gradient(var(--rule) 1px, transparent 1px), linear-gradient(90deg, var(--rule) 1px, transparent 1px); background-size: 48px 48px; opacity: 0.4; pointer-events: none; }
+
+  .hero-left { position: relative; z-index: 2; animation: fadeUp 0.9s 0.15s ease both; }
+  .hero-eyebrow { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 1.5rem; }
+  .eyebrow-line { width: 28px; height: 2px; background: var(--teal); flex-shrink: 0; }
+  .eyebrow-text { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal); }
+  h1 { font-family: 'Syne', sans-serif; font-size: clamp(2.6rem, 4.5vw, 4rem); font-weight: 700; line-height: 1.08; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+  h1 .name-last { color: var(--teal); display: block; }
+  .hero-role { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.08em; color: var(--ink-muted); margin-bottom: 1.8rem; text-transform: uppercase; }
+  .hero-bio { font-size: 1rem; color: var(--ink-soft); max-width: 44ch; margin-bottom: 2.5rem; line-height: 1.8; }
+  .hero-bio strong { color: var(--ink); font-weight: 500; }
+  .hero-ctas { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+  .btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.7rem 1.6rem; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: all 0.22s; cursor: pointer; border: none; }
+  .btn-primary { background: var(--teal); color: #fff; }
+  .btn-primary:hover { background: var(--teal-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(26,107,107,0.25); }
+  .btn-outline { background: transparent; color: var(--ink-soft); border: 1.5px solid rgba(13,17,23,0.2); }
+  .btn-outline:hover { border-color: var(--teal); color: var(--teal); transform: translateY(-2px); }
+
+  .hero-right { position: relative; z-index: 2; animation: fadeUp 0.9s 0.3s ease both; }
+  .stats-panel { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--rule); border: 1px solid var(--rule); }
+  .stat-card { background: var(--cream); padding: 1.8rem; transition: background 0.2s; }
+  .stat-card:hover { background: var(--white); }
+  .stat-num { font-family: 'Syne', sans-serif; font-size: 2.8rem; font-weight: 700; line-height: 1; color: var(--teal); margin-bottom: 0.35rem; letter-spacing: -0.02em; }
+  .stat-num sup { font-size: 1.1rem; }
+  .stat-lbl { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); }
+  .stat-card.dark { background: var(--ink); grid-column: span 2; padding: 1.5rem 1.8rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .stat-card.dark:hover { background: #161c24; }
+  .stat-card.dark .stat-lbl { color: rgba(168,216,216,0.7); margin-bottom: 0.3rem; }
+  .stat-card.dark .stat-text { font-family: 'Inter', sans-serif; font-size: 0.88rem; color: rgba(240,237,230,0.75); font-weight: 300; }
+  .stat-card.dark .stat-text strong { color: #7dd3d3; font-weight: 500; }
+  .stat-arrow { font-size: 1.2rem; color: rgba(255,255,255,0.25); flex-shrink: 0; }
+
+  /* ── SHARED ── */
+  section { padding: 5.5rem 2.8rem; }
+  .sec-eyebrow { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.8rem; }
+  .sec-eyebrow .eyebrow-line { width: 28px; height: 2px; background: var(--teal); }
+  .sec-eyebrow .eyebrow-text { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal); }
+  h2 { font-family: 'Syne', sans-serif; font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 3rem; line-height: 1.15; color: var(--ink); }
+
+  /* ── FOCUS ── */
+  .focus { background: var(--cream-warm); }
+  .focus-grid { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--rule); }
+  .focus-item { padding: 2.5rem; border-right: 1px solid var(--rule); transition: background 0.25s; position: relative; overflow: hidden; }
+  .focus-item::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--teal); transform: scaleX(0); transition: transform 0.3s; transform-origin: left; }
+  .focus-item:hover::after { transform: scaleX(1); }
+  .focus-item:last-child { border-right: none; }
+  .focus-item:hover { background: var(--white); }
+  .focus-icon { font-size: 1.6rem; margin-bottom: 1.2rem; display: block; }
+  .focus-item h3 { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 600; margin-bottom: 0.8rem; letter-spacing: -0.01em; }
+  .focus-item p { font-size: 0.875rem; color: var(--ink-soft); line-height: 1.75; }
+  .focus-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.2rem; }
+  .tag { font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; letter-spacing: 0.07em; text-transform: uppercase; padding: 0.22rem 0.55rem; background: var(--teal-pale); color: var(--teal); border-radius: 2px; }
+
+  /* ── TIMELINE ── */
+  .experience { background: var(--cream); }
+  .timeline { max-width: 760px; position: relative; padding-left: 1.5rem; }
+  .timeline::before { content: ''; position: absolute; left: 0; top: 8px; bottom: 0; width: 1px; background: linear-gradient(to bottom, var(--teal) 60%, transparent 100%); }
+  .tl-item { padding-left: 2rem; margin-bottom: 2.8rem; position: relative; }
+  .tl-dot { position: absolute; left: -4.5px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 3px var(--cream), 0 0 0 4.5px var(--teal); }
+  .tl-dot.gold { background: var(--gold); box-shadow: 0 0 0 3px var(--cream), 0 0 0 4.5px var(--gold); }
+  .tl-period { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 0.3rem; }
+  .tl-title { font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 600; margin-bottom: 0.2rem; letter-spacing: -0.01em; }
+  .tl-org { font-size: 0.82rem; color: var(--teal); margin-bottom: 0.55rem; font-weight: 400; }
+  .tl-desc { font-size: 0.86rem; color: var(--ink-soft); line-height: 1.7; }
+
+  /* ── PUBLICATIONS ── */
+  .publications { background: var(--cream-warm); }
+  .pub-tabs { display: flex; gap: 0; margin-bottom: 2.5rem; border-bottom: 1px solid var(--rule); flex-wrap: wrap; }
+  .pub-tab { font-family: 'JetBrains Mono', monospace; font-size: 0.63rem; letter-spacing: 0.09em; text-transform: uppercase; padding: 0.75rem 1.3rem; cursor: pointer; color: var(--ink-muted); border: none; border-bottom: 2px solid transparent; margin-bottom: -1px; background: none; transition: color 0.2s, border-color 0.2s; }
+  .pub-tab.active { color: var(--teal); border-bottom-color: var(--teal); }
+  .pub-tab:hover:not(.active) { color: var(--ink-soft); }
+  .pub-panel { display: none; }
+  .pub-panel.active { display: block; }
+  .pub-list { list-style: none; }
+  .pub-item { padding: 1.3rem 0; border-bottom: 1px solid var(--rule); display: grid; grid-template-columns: 2.2rem 1fr; gap: 1rem; transition: background 0.18s; border-radius: 4px; }
+  .pub-item:last-child { border-bottom: none; }
+  .pub-item:hover { background: rgba(255,255,255,0.55); margin: 0 -0.8rem; padding-left: 0.8rem; padding-right: 0.8rem; }
+  .pub-num { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--ink-muted); padding-top: 0.22rem; }
+  .pub-title { font-size: 0.92rem; color: var(--ink); font-weight: 400; line-height: 1.5; margin-bottom: 0.3rem; }
+  .pub-meta { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: var(--ink-muted); }
+  .pub-meta .journal { color: var(--teal); }
+  .pub-meta .yr { background: var(--teal-pale); color: var(--teal); padding: 0.1rem 0.4rem; border-radius: 2px; margin-right: 0.4rem; font-size: 0.58rem; }
+  .pub-badges { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.45rem; align-items: center; }
+  .badge { font-family: 'JetBrains Mono', monospace; font-size: 0.56rem; letter-spacing: 0.05em; text-transform: uppercase; padding: 0.14rem 0.42rem; border-radius: 2px; }
+  .badge-if { background: var(--gold-pale); color: var(--gold); }
+  .badge-cit { background: #e6f4e6; color: #2d6a2d; }
+  .pub-link { font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; color: var(--teal); text-decoration: none; letter-spacing: 0.05em; transition: opacity 0.2s; }
+  .pub-link:hover { opacity: 0.75; text-decoration: underline; }
+
+  /* Conference */
+  .conf-year-group { margin-bottom: 2.2rem; }
+  .conf-year-label { font-family: 'Syne', sans-serif; font-size: 1.15rem; font-weight: 700; color: var(--teal); margin-bottom: 0.9rem; letter-spacing: -0.01em; }
+  .conf-text { font-size: 0.86rem; color: var(--ink-soft); line-height: 1.68; padding: 0.75rem 0; border-bottom: 1px solid rgba(13,17,23,0.06); }
+  .conf-text:last-child { border-bottom: none; }
+  .conf-award { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 0.56rem; letter-spacing: 0.06em; text-transform: uppercase; background: var(--gold-pale); color: var(--gold); padding: 0.12rem 0.42rem; border-radius: 2px; margin-left: 0.5rem; vertical-align: middle; }
+
+  /* ── PROFILES ── */
+  .profiles { background: var(--cream); }
+  .profiles-wrap { display: flex; flex-wrap: wrap; gap: 0.7rem; max-width: 660px; }
+  .profile-link { display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.55rem 1rem; border: 1.5px solid var(--rule); background: var(--white); color: var(--ink-soft); font-family: 'JetBrains Mono', monospace; font-size: 0.64rem; letter-spacing: 0.07em; text-transform: uppercase; text-decoration: none; transition: all 0.2s; border-radius: 2px; }
+  .profile-link:hover { border-color: var(--teal); color: var(--teal); transform: translateY(-2px); box-shadow: 0 4px 14px rgba(26,107,107,0.12); }
+  .pdot { width: 5px; height: 5px; border-radius: 50%; background: var(--teal-pale); flex-shrink: 0; transition: background 0.2s; }
+  .profile-link:hover .pdot { background: var(--teal); }
+
+  /* ── CONTACT ── */
+  .contact { background: var(--ink); color: var(--cream); }
+  .contact .eyebrow-line { background: #7dd3d3; }
+  .contact .eyebrow-text { color: #7dd3d3; }
+  .contact h2 { color: #f0ede6; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+  .contact-text { font-size: 0.97rem; color: rgba(240,237,230,0.65); line-height: 1.85; }
+  .contact-text a { color: #7dd3d3; text-decoration: none; }
+  .contact-text a:hover { text-decoration: underline; }
+  .contact-rows { display: flex; flex-direction: column; gap: 1.3rem; }
+  .c-row-label { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(125,211,211,0.6); margin-bottom: 0.2rem; }
+  .c-row-val { font-size: 0.9rem; color: rgba(240,237,230,0.8); }
+  .c-row-val a { color: #7dd3d3; text-decoration: none; }
+  .c-row-val a:hover { text-decoration: underline; }
+
+  /* ── FOOTER ── */
+  footer { background: #080c12; color: rgba(240,237,230,0.3); padding: 1.8rem 2.8rem; display: flex; align-items: center; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; flex-wrap: wrap; gap: 0.5rem; }
+  .footer-name { font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 600; color: rgba(240,237,230,0.45); text-transform: none; letter-spacing: -0.01em; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeDown { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: none; } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.65s ease, transform 0.65s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 960px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--cream); border-bottom: 1px solid var(--rule); padding: 1rem 1.5rem; gap: 1.2rem; }
+    .nav-links.open { display: flex; }
+    .nav-hamburger { display: flex; }
+    .hero { grid-template-columns: 1fr; padding: 6.5rem 1.5rem 3rem; min-height: auto; gap: 2.5rem; }
+    .hero-grid-bg { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .focus-grid { grid-template-columns: 1fr 1fr; }
+    .focus-item { border-right: none; border-bottom: 1px solid var(--rule); }
+    .focus-item:nth-child(odd) { border-right: 1px solid var(--rule); }
+    .focus-item:last-child { border-bottom: none; }
+    .focus-item:nth-last-child(2):nth-child(odd) { border-bottom: none; }
+    .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    footer { flex-direction: column; text-align: center; }
+  }
+  @media (max-width: 600px) {
+    h1 { font-size: 2.3rem; }
+    .stats-panel { grid-template-columns: 1fr 1fr; }
+    .pub-item { grid-template-columns: 1.8rem 1fr; }
+    .focus-grid { grid-template-columns: 1fr; }
+    .focus-item { border-right: none !important; border-bottom: 1px solid var(--rule); }
+    .focus-item:last-child { border-bottom: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#hero" class="nav-logo">GN<span>.</span>Tsaousis</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#focus">Research</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#profiles">Profiles</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-mesh"></div>
+  <div class="hero-left">
+    <div class="hero-eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">Clinical Genomics · Bioinformatics</span></div>
+    <h1>Georgios N.<span class="name-last">Tsaousis</span></h1>
+    <p class="hero-role">PhD &nbsp;·&nbsp; Group Leader &nbsp;·&nbsp; Lecturer</p>
+    <p class="hero-bio">Bridging <strong>computational biology</strong> and <strong>clinical diagnostics</strong> across oncology, cardiology, and neurology. Over 15 years building NGS pipelines, translating genomic data into actionable clinical insight, and training the next generation of bioinformaticians.</p>
+    <div class="hero-ctas">
+      <a href="#publications" class="btn btn-primary">Publications</a>
+      <a href="https://scholar.google.gr/citations?user=9b9AhIQAAAAJ&hl=en" class="btn btn-outline" target="_blank" rel="noopener">Google Scholar</a>
+      <a href="#contact" class="btn btn-outline">Contact</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="stats-panel">
+      <div class="stat-card"><div class="stat-num">15<sup>+</sup></div><div class="stat-lbl">Years in field</div></div>
+      <div class="stat-card"><div class="stat-num">45<sup>+</sup></div><div class="stat-lbl">Journal papers</div></div>
+      <div class="stat-card"><div class="stat-num">PhD</div><div class="stat-lbl">Bioinformatics, UoA</div></div>
+      <div class="stat-card"><div class="stat-num">859<sup>+</sup></div><div class="stat-lbl">Citations</div></div>
+      <div class="stat-card dark">
+        <div><div class="stat-lbl">Affiliations</div><div class="stat-text"><strong>GeneKor SA</strong> · Group Leader of Bioinformatics<br>Elected Board Member ·  Hellenic Society for Computational Biology & Bioinformatics (HSCBB)</div></div>
+        <div class="stat-arrow">→</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOCUS -->
+<section class="focus" id="focus">
+  <div class="sec-eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">Research Focus</span></div>
+  <h2>Where I work</h2>
+  <div class="focus-grid reveal">
+    <div class="focus-item">
+      <span class="focus-icon">🧬</span>
+      <h3>Clinical Genomics</h3>
+      <p>Genetic testing, variant classification, and germline interpretation across hereditary cancer syndromes, cardiological, neurological and rare diseases.</p>
+      <div class="focus-tags"><span class="tag">ACMG/AMP</span><span class="tag">CNV analysis</span><span class="tag">VUS</span><span class="tag">ClinGen</span><span class="tag">WES/WGS</span></div>
+    </div>
+    <div class="focus-item">
+      <span class="focus-icon">⚗️</span>
+      <h3>Somatic Genomics & Liquid Biopsy</h3>
+      <p>NGS-based tumor molecular profiling, ctDNA analysis, HRD assessment for precision oncology across solid tumours.</p>
+      <div class="focus-tags"><span class="tag">ctDNA</span><span class="tag">HRD</span><span class="tag">TMB</span><span class="tag">evidence-based interpretation</span></div>
+    </div>
+    <div class="focus-item">
+      <span class="focus-icon">📊</span>
+      <h3>Clinical Data Science & Health Informatics</h3>
+      <p>Statistical analysis of genomic and clinical cohorts, EHR data integration, Laboratory Information System (LIS) development, and patient-level data linkage for translational research.</p>
+      <div class="focus-tags"><span class="tag">EHR</span><span class="tag">GLIMS</span><span class="tag">Cohort analysis</span><span class="tag">Patient data integration</span><span class="tag">GStats</span></div>
+    </div>
+    <div class="focus-item">
+      <span class="focus-icon">🔬</span>
+      <h3>Computational Biology</h3>
+      <p>Sequence analysis, protein structure prediction, membrane protein topology, and Hidden Markov Model-based tools — the foundational research thread running from PhD through postdoctoral work.</p>
+      <div class="focus-tags"><span class="tag">HMMs</span><span class="tag">Transmembrane proteins</span><span class="tag">MoRFs</span><span class="tag">GPCR detection</span><span class="tag">Database development</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="experience" id="experience">
+  <div class="sec-eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">Experience</span></div>
+  <h2>Career timeline</h2>
+  <div class="timeline reveal">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-period">May 2015 — Present</div>
+      <div class="tl-title">Group Leader of Bioinformatics</div>
+      <div class="tl-org">Genekor Medical SA, Athens</div>
+      <div class="tl-desc">Leading clinical NGS pipelines, variant classification workflows, and translational genomics R&D across hereditary cancer, cardiology, and neurology programmes. Directing cross-functional bioinformatics team.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot gold"></div>
+      <div class="tl-period">October 2020 — Present</div>
+      <div class="tl-title">Lecturer (Module Leader)</div>
+      <div class="tl-org">Metropolitan College, Athens</div>
+      <div class="tl-desc">Module leader for Functional Genomics and Research Skills, and Clinical Genetics and Diagnostics — both within the MSc in Medical Genetics and Genomics programme.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot gold"></div>
+      <div class="tl-period">September 2014 — September 2025</div>
+      <div class="tl-title">Lecturer</div>
+      <div class="tl-org">MSc in Bioinformatics, Faculty of Biology, University of Athens</div>
+      <div class="tl-desc">Teaching "Programming Languages and Software Tools in Bioinformatics I & II" at postgraduate level.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-period">March 2014 — March 2015</div>
+      <div class="tl-title">Post-Doctoral Research Fellow</div>
+      <div class="tl-org">Faculty of Biology, University of Athens</div>
+      <div class="tl-desc">"Comprehensive Study of Membrane Receptors' function and Correlation with Disease, using Bioinformatics" — Synergasia 2009 Project, funded by the Greek Ministry of Education.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-period">February 2009 — February 2014</div>
+      <div class="tl-title">Researcher</div>
+      <div class="tl-org">Faculty of Biology, University of Athens</div>
+      <div class="tl-desc">PhD research on bioinformatics of membrane protein function and structure. Heracleitus II PhD fellowship (NSRF/EU, 2010–2013).</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-period">February 2006 — February 2014</div>
+      <div class="tl-title">Teaching Assistant</div>
+      <div class="tl-org">Faculty of Biology, University of Athens</div>
+      <div class="tl-desc">Assisting the laboratory practicals of the BSc course 'Bioinformatics'.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section class="publications" id="publications">
+  <div class="sec-eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">Research Output</span></div>
+  <h2>Publications</h2>
+  <div class="reveal">
+    <div class="pub-tabs">
+      <button class="pub-tab active" onclick="showTab('journals',this)">Journal Articles (45)</button>
+      <button class="pub-tab" onclick="showTab('books',this)">Book Chapters (2)</button>
+      <button class="pub-tab" onclick="showTab('conferences',this)">Selected Conference Abstracts</button>
+    </div>
+
+    <!-- JOURNALS -->
+    <div class="pub-panel active" id="tab-journals"><ul class="pub-list">
+      <li class="pub-item"><div class="pub-num">45</div><div><div class="pub-title">Germline Genetic Testing in Breast and Gynecologic Cancers: Evaluating Age at Diagnosis as a Determinant</div><div class="pub-meta"><span class="yr">2026</span><span class="journal">Cancers (Basel)</span> · Papadopoulou E, Tsaousis GN, et al.</div><div class="pub-badges"><a href="https://doi.org/10.3390/cancers18101541" class="pub-link" target="_blank">DOI →</a><span class="badge badge-cit">PMID 42192902</span></div></div></li>
+      <li class="pub-item"><div class="pub-num">44</div><div><div class="pub-title">Updated ENIGMA Recommendations for Reporting Germline Variants in Cancer Susceptibility Genes and Their Translation into Twenty Languages</div><div class="pub-meta"><span class="yr">2026</span><span class="journal">Journal of Medical Genetics</span> · De Nicolo A, Eccles DM, …, Tsaousis G, et al.</div><div class="pub-badges"><a href="https://doi.org/10.1136/jmg-2026-111498" class="pub-link" target="_blank">DOI →</a><span class="badge badge-cit">PMID 42135054</span></div></div></li>
+      <li class="pub-item"><div class="pub-num">43</div><div><div class="pub-title">Implementation of a 1021-Gene Liquid Biopsy Assay for Real-World Tumor Genomic Profiling in Oncology Practice</div><div class="pub-meta"><span class="yr">2026</span><span class="journal">Scientific Reports</span> · Florou-Chatzigiannidou C, Papadopoulou E, …, Tsaousis G, et al.</div><div class="pub-badges"><a href="https://doi.org/10.1038/s41598-026-40923-7" class="pub-link" target="_blank">DOI →</a><span class="badge badge-cit">PMID 41721022</span></div></div></li>
+      <li class="pub-item"><div class="pub-num">42</div><div><div class="pub-title">Evaluation of the 1021-HRD Assay Compared to Established HRD Testing Platforms in Ovarian Cancer</div><div class="pub-meta"><span class="yr">2026</span><span class="journal">Translational Oncology</span> · Papadopoulou E, Fountzilas E, …, Tsaousis G, et al.</div><div class="pub-badges"><a href="https://doi.org/10.1016/j.tranon.2025.102621" class="pub-link" target="_blank">DOI →</a><span class="badge badge-cit">PMID 41319389</span></div></div></li>
+      <li class="pub-item"><div class="pub-num">41</div><div><div class="pub-title">Comprehensive Evaluation of a 1021-Gene Panel in FFPE and Liquid Biopsy for Analytical and Clinical Use</div><div class="pub-meta"><span class="yr">2025</span><span class="journal">International Journal of Molecular Sciences</span> · Meintani A, …, Tsaousis GN, et al.</div><div class="pub-badges"><a href="https://doi.org/10.3390/ijms26135930" class="pub-link" target="_blank">DOI →</a><span class="badge badge-cit">PMID 40649709</span></div></div></li>
+      <li class="pub-item"><div class="pub-num">40</div><div><div class="pub-title">Molecular Alterations in Paired Epithelial Ovarian Tumors in Patients Treated with Neoadjuvant Chemotherapy</div><div class="pub-meta"><span class="yr">2024</span><span class="journal">Cancers (Basel)</span> · Nikolaidi A, Papadopoulou E, …, Tsaousis GN, et al.</div><div class="pub-badges"><a href="https://doi.org/10.3390/cancers16213580" class="pub-link" target="_blank">DOI →</a></div></div></li>
+      <li class="pub-item"><div class="pub-num">39</div><div><div class="pub-title">The Clinical and Genetic Landscape of Hereditary Cancer: Experience from a Single Clinical Diagnostic Laboratory</div><div class="pub-meta"><span class="yr">2024</span><span class="journal">Cancer Genomics Proteomics</span> · Tsoulos N, Agiannitopoulos K, …, Tsaousis GN, et al.</div><div class="pub-badges"><a href="https://doi.org/10.21873/cgp.20463" class="pub-link" target="_blank">DOI →</a></div></div></li>
+      <li class="pub-item"><div class="pub-num">38</div><div><div class="pub-title">Polygenic Risk Score (PRS) Combined with NGS Panel Testing Increases Accuracy in Hereditary Breast Cancer Risk Estimation</div><div class="pub-meta"><span class="yr">2024</span><span class="journal">Diagnostics (Basel)</span> · Tsoulos N, …, Tsaousis GN, et al.</div><div class="pub-badges"><a href="https://doi.org/10.3390/diagnostics14161826" class="pub-link" target="_blank">DOI →</a></div></div></li>
+      <li class="pub-item"><div class="pub-num">37</div><div><div class="pub-title">Germline Co-deletion of CDKN2A and CDKN2B Genes in Pleomorphic Xanthoastrocytoma: Case Report</div><div class="pub-meta"><span class="yr">2024</span><span class="journal">In Vivo</span> · Agiannitopoulos K, …, Tsaousis GN, et al.</div><div class="pub-badges"><a href="https://doi.org/10.21873/invivo.13617" class="pub-link" target="_blank">DOI →</a></div></div></li>
+      <li class="pub-item"><div class="pub-num">36</div><div><div class="pub-title">Microsatellite Instability Is Insufficiently Used as a Biomarker for Lynch Syndrome Testing in Clinical Practice</div><div class="pub-meta"><span class="yr">2024</span><span class="journal">JCO Precision Oncology</span> · Papadopoulou E, …, Tsaousis G, et al.</div><div class="pub-badges"><a href="https://doi.org/10.1200/PO.23.00332" class="pub-link" target="_blank">DOI →</a></div></div></li>
+      <li class="pub-item"><div class="pub-num">35</div><div><div class="pub-title">Digging into the NGS Information from a Large-Scale South European Population with Metastatic/Unresectable Pancreatic Ductal Adenocarcinoma</div><div class="pub-meta"><span class="yr">2023</span><span class="journal">Cancers (Basel)</span> · Ziogas DC, …, Tsaousis GN, et al.</div><div class="pub-badges"><a href="https://doi.org/10.3390/cancers16010002" class="pub-link" target="_blank">DOI →</a></div></div></li>
+      <li class="pub-item"><div class="pub-num">34</div><div><div class="pub-title">Concordance between Three HRD Assays in Patients with High-Grade Epithelial Ovarian Cancer</div><div class="pub-meta"><span class="yr">2023</span><span class="journal">Cancers (Basel)</span> · Fountzilas E, …, Tsaousis G, et al.</div><div class="pub-badges"><a href="https://doi.org/10.3390/cancers15235525" class="pub-link" target="_blank">DOI →</a></div></div></li>
+      <li class="pub-item"><div class="pub-num">33</div><div><div class="pub-title">RediScore: Prospective Validation of a Pipeline for Homologous Recombination Deficiency Analysis</div><div class="pub-meta"><span class="yr">2023</span><span class="journal">Oncology Letters</span> · Tsantikidi A, …, Tsaousis G, et al.</div><div class="pub-badges"><a href="https://doi.org/10.3892/ol.2023.14060" class="pub-link" target="_blank">DOI →</a></div></div></li>
+      <li class="pub-item"><div class="pub-num">32</div><div><div class="pub-title">Only 32.3% of Breast Cancer Families with Pathogenic Variants in Cancer Genes Utilized Cascade Genetic Testing</div><div class="pub-meta"><span class="yr">2023</span><span class="journal">Cancers (Basel)</span> · Agiannitopoulos K, …, Tsaousis GN, et al.</div><div class="pub-badges"><a href="https://doi.org/10.3390/cancers15215218" class="pub-link" target="_blank">DOI →</a></div></div></li>
+      <li class="pub-item"><div class="pub-num">31</div><div><div class="pub-title">The Utility of NGS Analysis in Homologous Recombination Deficiency Tracking</div><div class="pub-meta"><span class="yr">2023</span><span class="journal">Diagnostics (Basel)</span> · Tsantikidi A, …, Tsaousis G, et al.</div><div class="pub-badges"><a href="https://doi.org/10.3390/diagnostics13182962" class="pub-link" target="_blank">DOI →</a></div></div></li>
+      <li class="pub-item"><div class="pub-num">30</div><div><div class="pub-title">Copy Number Variations (CNVs) Account for 10.8% of Pathogenic Variants in Patients Referred for Hereditary Cancer Testing</div><div class="pub-meta"><span class="yr">2023</span><span class="journal">Cancer Genomics Proteomics</span> · Agiannitopoulos K, …, Tsaousis GN, et al.</div><div class="pub-badges"><span class="badge badge-cit">PMID 37643779</span><a href="https://doi.org/10.21873/cgp.20396" class="pub-link" target="_blank">DOI →</a></div></div></li>
+      <li class="pub-item"><div class="pub-num">29</div><div><div class="pub-title">CNV and RNA Analysis Reveal a Germline Pathogenic Duplication of MSH2 Exon 15 in a Family with Lynch Syndrome: A Case Report</div><div class="pub-meta"><span class="yr">2023</span><span class="journal">Journal of Clinical Images and Medical Case Reports</span> · Apostolopoulou D, Özdoğan M, Agiannitopoulos K, Pepe G, Potska K, Tsaousis GN, et al.</div></div></li>
+      <li class="pub-item"><div class="pub-num">28</div><div><div class="pub-title">Reclassification of Splicing Gene Variants in Hereditary Cancer: Cases Report and Literature Review</div><div class="pub-meta"><span class="yr">2023</span><span class="journal">In Vivo</span> · Bouzarelou D, …, Tsaousis GN, et al.</div><div class="pub-badges"><a href="https://doi.org/10.21873/invivo.13227" class="pub-link" target="_blank">DOI →</a></div></div></li>
+      <li class="pub-item"><div class="pub-num">27</div><div><div class="pub-title">A Novel Deletion of Exon 4 in the Ectodysplasin A Gene Associated with X-linked Hypohidrotic Ectodermal Dysplasia</div><div class="pub-meta"><span class="yr">2023</span><span class="journal">Archives of Oral Biology</span> · Agiannitopoulos K, …, Tsaousis GN, et al.</div><div class="pub-badges"><a href="https://doi.org/10.1016/j.archoralbio.2023.105689" class="pub-link" target="_blank">DOI →</a></div></div></li>
+      <li class="pub-item"><div class="pub-num">26</div><div><div class="pub-title">The Evolution of Comprehensive Genetic Analysis in Neurology: Implications for Precision Medicine</div><div class="pub-meta"><span class="yr">2023</span><span class="journal">Journal of the Neurological Sciences</span> · Papadopoulou E, …, Tsaousis G, et al.</div><div class="pub-badges"><a href="https://doi.org/10.1016/j.jns.2023.120609" class="pub-link" target="_blank">DOI →</a></div></div></li>
+      <li class="pub-item"><div class="pub-num">25</div><div><div class="pub-title">Genetic Predisposition to Male Breast Cancer: A Case Series</div><div class="pub-meta"><span class="yr">2022</span><span class="journal">Anticancer Research</span> · Apessos A, …, Tsaousis GN, et al.</div><div class="pub-badges"><a href="https://doi.org/10.21873/anticanres.16086" class="pub-link" target="_blank">DOI →</a></div></div></li>
+      <li class="pub-item"><div class="pub-num">24</div><div><div class="pub-title">Importance of Multigene Panel Test in Patients with Consanguineous Marriage and Family History of Breast Cancer</div><div class="pub-meta"><span class="yr">2022</span><span class="journal">Oncology Letters</span> · Ozmen V, …, Tsaousis GN, et al.</div><div class="pub-badges"><a href="https://doi.org/10.3892/ol.2022.13238" class="pub-link" target="_blank">DOI →</a></div></div></li>
+      <li class="pub-item"><div class="pub-num">23</div><div><div class="pub-title">Revisiting the Implications of Positive Germline Testing Results Using Multi-gene Panels in Breast Cancer Patients</div><div class="pub-meta"><span class="yr">2022</span><span class="journal">Cancer Genomics Proteomics</span> · Tsaousis GN, Papadopoulou E, et al.</div><div class="pub-badges"><a href="https://doi.org/10.21873/cgp.20305" class="pub-link" target="_blank">DOI →</a></div></div></li>
+      <li class="pub-item"><div class="pub-num">22</div><div><div class="pub-title">Comprehensive Tumor Molecular Profile Analysis in Clinical Practice</div><div class="pub-meta"><span class="yr">2021</span><span class="journal">BMC Medical Genomics</span> · Özdoğan M, Papadopoulou E, …, Tsaousis G, et al.</div><div class="pub-badges"><a href="https://doi.org/10.1186/s12920-021-00950-7" class="pub-link" target="_blank">DOI →</a></div></div></li>
+      <li class="pub-item"><div class="pub-num">21</div><div><div class="pub-title">Clinical Utility of Functional RNA Analysis for the Reclassification of Splicing Gene Variants in Hereditary Cancer</div><div class="pub-meta"><span class="yr">2021</span><span class="journal">Cancer Genomics Proteomics</span> · Agiannitopoulos K, …, Tsaousis GN, et al.</div><div class="pub-badges"><a href="https://doi.org/10.21873/cgp.20259" class="pub-link" target="_blank">DOI →</a></div></div></li>
+      <li class="pub-item"><div class="pub-num">20</div><div><div class="pub-title">The Human GPCR Signal Transduction Network</div><div class="pub-meta"><span class="yr">2021</span><span class="journal">Network Modeling Analysis in Health Informatics and Bioinformatics</span> · Kontou P, …, Tsaousis GN, et al.</div><div class="pub-badges"><a href="https://doi.org/10.1007/s13721-020-00278-z" class="pub-link" target="_blank">DOI →</a></div></div></li>
+      <li class="pub-item"><div class="pub-num">19</div><div><div class="pub-title">Report of a Germline Double Heterozygote in MSH2 and PALB2</div><div class="pub-meta"><span class="yr">2020</span><span class="journal">Molecular Genetics & Genomic Medicine</span> · Agiannitopoulos K, …, Tsaousis GN, et al.</div><div class="pub-badges"><a href="https://doi.org/10.1002/mgg3.1242" class="pub-link" target="_blank">DOI →</a></div></div></li>
+      <li class="pub-item"><div class="pub-num">18</div><div><div class="pub-title">miRNA Polymorphisms and Risk of Premature Coronary Artery Disease</div><div class="pub-meta"><span class="yr">2020</span><span class="journal">Hellenic Journal of Cardiology</span> · Agiannitopoulos K, …, Tsaousis GN, et al.</div><div class="pub-badges"><a href="https://doi.org/10.1016/j.hjc.2020.01.005" class="pub-link" target="_blank">DOI →</a></div></div></li>
+      <li class="pub-item"><div class="pub-num">17</div><div><div class="pub-title">Investigation of Genetic Basis in the Treatment of Age-related Macular Degeneration</div><div class="pub-meta"><span class="yr">2020</span><span class="journal">International Ophthalmology</span> · Gourgouli K, …, Tsaousis G, et al.</div><div class="pub-badges"><a href="https://doi.org/10.1007/s10792-019-01274-7" class="pub-link" target="_blank">DOI →</a></div></div></li>
+      <li class="pub-item"><div class="pub-num">16</div><div><div class="pub-title">PerMemDB: A Database for Eukaryotic Peripheral Membrane Proteins</div><div class="pub-meta"><span class="yr">2020</span><span class="journal">Biochimica et Biophysica Acta – Biomembranes</span> · Nastou KC, Tsaousis GN, Iconomidou VA.</div><div class="pub-badges"><a href="https://doi.org/10.1016/j.bbamem.2019.183076" class="pub-link" target="_blank">DOI →</a></div></div></li>
+      <li class="pub-item"><div class="pub-num">15</div><div><div class="pub-title">Clinical Feasibility of NGS Liquid Biopsy Analysis in NSCLC Patients</div><div class="pub-meta"><span class="yr">2019</span><span class="journal">PLOS ONE</span> · Papadopoulou E, …, Tsaousis GN, et al.</div><div class="pub-badges"><a href="https://doi.org/10.1371/journal.pone.0226853" class="pub-link" target="_blank">DOI →</a></div></div></li>
+      <li class="pub-item"><div class="pub-num">14</div><div><div class="pub-title">Characterization of the c.793-1G>A Splicing Variant in CHEK2 Gene as Pathogenic: A Case Report</div><div class="pub-meta"><span class="yr">2019</span><span class="journal">BMC Medical Genetics</span> · Agiannitopoulos K, …, Tsaousis GN, et al.</div><div class="pub-badges"><span class="badge badge-if">IF 5.48</span><a href="https://doi.org/10.1186/s12881-019-0866-z" class="pub-link" target="_blank">DOI →</a></div></div></li>
+      <li class="pub-item"><div class="pub-num">13</div><div><div class="pub-title">JUCHMME: A Java Utility for Class Hidden Markov Models and Extensions for Biological Sequence Analysis</div><div class="pub-meta"><span class="yr">2019</span><span class="journal">Bioinformatics</span> · Tamposis IA, …, Tsaousis GN, et al.</div><div class="pub-badges"><span class="badge badge-if">IF 4.53</span><a href="https://doi.org/10.1093/bioinformatics/btz533" class="pub-link" target="_blank">DOI →</a></div></div></li>
+      <li class="pub-item"><div class="pub-num">12</div><div><div class="pub-title">Analysis of Hereditary Cancer Syndromes by Using a Panel of Genes: Novel and Multiple Pathogenic Mutations</div><div class="pub-meta"><span class="yr">2019</span><span class="journal">BMC Cancer</span> · Tsaousis GN, Papadopoulou E, et al.</div><div class="pub-badges"><span class="badge badge-cit">104 citations</span><span class="badge badge-if">IF 2.93</span><a href="https://doi.org/10.1186/s12885-019-5756-4" class="pub-link" target="_blank">DOI →</a></div></div></li>
+      <li class="pub-item"><div class="pub-num">11</div><div><div class="pub-title">Comprehensive BRCA Mutation Analysis in the Greek Population</div><div class="pub-meta"><span class="yr">2018</span><span class="journal">Cancer Genetics</span> · Apessos A, …, Tsaousis GN, et al.</div><div class="pub-badges"><span class="badge badge-cit">9 citations</span></div></div></li>
+      <li class="pub-item"><div class="pub-num">10</div><div><div class="pub-title">Tumor Molecular Profiling of NSCLC Patients Using Next Generation Sequencing</div><div class="pub-meta"><span class="yr">2017</span><span class="journal">Oncology Reports</span> · Tsoulos N, …, Tsaousis GN, et al.</div><div class="pub-badges"><span class="badge badge-cit">22 citations</span></div></div></li>
+      <li class="pub-item"><div class="pub-num">9</div><div><div class="pub-title">Molecular Predictive Markers in Tumors of the Gastrointestinal Tract</div><div class="pub-meta"><span class="yr">2016</span><span class="journal">World Journal of Gastrointestinal Oncology</span> · Papadopoulou E, …, Tsaousis GN, et al.</div><div class="pub-badges"><span class="badge badge-cit">7 citations</span></div></div></li>
+      <li class="pub-item"><div class="pub-num">8</div><div><div class="pub-title">MBPpred: Proteome-wide Detection of Membrane Lipid-binding Proteins Using Profile Hidden Markov Models</div><div class="pub-meta"><span class="yr">2016</span><span class="journal">Biochimica et Biophysica Acta</span> · Nastou KC, Tsaousis GN, et al.</div><div class="pub-badges"><span class="badge badge-cit">7 citations</span></div></div></li>
+      <li class="pub-item"><div class="pub-num">7</div><div><div class="pub-title">Evidence for Association of the rs605059 Polymorphism of HSD17B1 Gene with Recurrent Spontaneous Abortions</div><div class="pub-meta"><span class="yr">2015</span><span class="journal">Journal of Maternal-Fetal & Neonatal Medicine</span> · Ntostis P, …, Tsaousis GN, et al.</div><div class="pub-badges"><span class="badge badge-cit">6 citations</span></div></div></li>
+      <li class="pub-item"><div class="pub-num">6</div><div><div class="pub-title">The Human Plasma Membrane Peripherome: Visualization and Analysis</div><div class="pub-meta"><span class="yr">2014</span><span class="journal">BioMed Research International</span> · Nastou KC, Tsaousis GN, et al.</div><div class="pub-badges"><span class="badge badge-cit">16 citations</span></div></div></li>
+      <li class="pub-item"><div class="pub-num">5</div><div><div class="pub-title">HMMpTM: Improving Transmembrane Protein Topology Prediction Using Phosphorylation and Glycosylation Site Prediction</div><div class="pub-meta"><span class="yr">2014</span><span class="journal">Biochimica et Biophysica Acta</span> · Tsaousis GN, Bagos PG, Hamodrakas SJ.</div><div class="pub-badges"><span class="badge badge-cit">17 citations</span></div></div></li>
+      <li class="pub-item"><div class="pub-num">4</div><div><div class="pub-title">mpMoRFsDB: A Database of Molecular Recognition Features (MoRFs) in Membrane Proteins</div><div class="pub-meta"><span class="yr">2013</span><span class="journal">Bioinformatics</span> · Gypas F, Tsaousis GN, Hamodrakas SJ.</div><div class="pub-badges"><span class="badge badge-if">IF 4.53</span><span class="badge badge-cit">8 citations</span></div></div></li>
+      <li class="pub-item"><div class="pub-num">3</div><div><div class="pub-title">Analysis of Molecular Recognition Features (MoRFs) in Membrane Proteins</div><div class="pub-meta"><span class="yr">2013</span><span class="journal">Biochimica et Biophysica Acta</span> · Kotta-Loizou I, Tsaousis GN, Hamodrakas SJ.</div><div class="pub-badges"><span class="badge badge-cit">27 citations</span></div></div></li>
+      <li class="pub-item"><div class="pub-num">2</div><div><div class="pub-title">ExTopoDB: A Database of Experimentally Derived Topological Models of Transmembrane Proteins</div><div class="pub-meta"><span class="yr">2010</span><span class="journal">Bioinformatics</span> · Tsaousis GN, Tsirigos KD, et al.</div><div class="pub-badges"><span class="badge badge-if">IF 4.53</span><span class="badge badge-cit">21 citations</span></div></div></li>
+      <li class="pub-item"><div class="pub-num">1</div><div><div class="pub-title">How Many 3D Structures Do We Need to Train a Predictor?</div><div class="pub-meta"><span class="yr">2009</span><span class="journal">Genomics Proteomics Bioinformatics</span> · Bagos PG, Tsaousis GN, Hamodrakas SJ.</div><div class="pub-badges"><span class="badge badge-if">IF 6.62</span><span class="badge badge-cit">5 citations</span></div></div></li>
+    </ul></div>
+
+    <!-- BOOK CHAPTERS -->
+    <div class="pub-panel" id="tab-books"><ul class="pub-list">
+      <li class="pub-item"><div class="pub-num">2</div><div><div class="pub-title">Predicting Alpha Helical Transmembrane Proteins Using HMMs</div><div class="pub-meta"><span class="yr">2017</span><span class="journal">Methods in Molecular Biology 1552:63–82 (Hidden Markov Models: Methods and Protocols)</span> · Tsaousis GN, Theodoropoulou MC, Hamodrakas SJ, Bagos PG.</div><div class="pub-badges"><span class="badge badge-cit">2 citations</span><a href="https://doi.org/10.1007/978-1-4939-6753-7_5" class="pub-link" target="_blank">DOI →</a></div></div></li>
+      <li class="pub-item"><div class="pub-num">1</div><div><div class="pub-title">Predicting Beta Barrel Transmembrane Proteins Using HMMs</div><div class="pub-meta"><span class="yr">2017</span><span class="journal">Methods in Molecular Biology 1552:43–61 (Hidden Markov Models: Methods and Protocols)</span> · Tsaousis GN, Hamodrakas SJ, Bagos PG.</div><div class="pub-badges"><span class="badge badge-cit">5 citations</span><a href="https://doi.org/10.1007/978-1-4939-6753-7_4" class="pub-link" target="_blank">DOI →</a></div></div></li>
+    </ul></div>
+
+    <!-- CONFERENCE ABSTRACTS — merged from site + Scholar, deduplicated, sorted by year desc -->
+    <div class="pub-panel" id="tab-conferences">
+
+      <div class="conf-year-group">
+        <div class="conf-year-label">2026</div>
+        <div class="conf-text">Venizelos V, Papazisis K, Markopoulos C, Xepapadakis G, Iosifidou R, Kapetsis G, Giannoulakis S, Tsoulos N, Meintani A, Tsaousis G, et al. Association of Oncotype DX Recurrence Score with Germline Mutations in Cancer Susceptibility Genes Including BRCA1/2 in HR+/HER2− Early Breast Cancer. <em>Clinical Cancer Research (SABCS 2025)</em>. Abstract PS3-08-24.</div>
+      </div>
+
+      <div class="conf-year-group">
+        <div class="conf-year-label">2025</div>
+        <div class="conf-text">Zavos A, Natsiopoulos I, Papazisis K, Giassas S, Tsiftsoglou A, Bouzarelou D, Meintani A, Katseli A, Potska V, Tsaousis G, et al. Li-Fraumeni: "Genetic testing of Breast/ovarian cancer patients unmask familial pathogenic germline variants in TP53 gene. Clinical implications and family counselling." <em>The Breast (St. Gallen 2025)</em>. P113.</div>
+      </div>
+
+      <div class="conf-year-group">
+        <div class="conf-year-label">2024</div>
+        <div class="conf-text">Agiannitopoulos K, Katseli N, Potska K, Dogka C, Tsoulos N, Papathanasiou A, Tsaousis G, et al. The importance of pre- and post-genetic counselling for genetic testing in hereditary cancer. <em>European Journal of Human Genetics (ESHG 2024)</em>.</div>
+        <div class="conf-text">Agiannitopoulos K, Potska K, Tsaousis G, Pepe G, Bouzarelou D, Katseli N, et al. Low-level constitutional mosaicism in breast cancer patients. <em>European Journal of Human Genetics (ESHG 2024)</em>.</div>
+        <div class="conf-text">Tsoulos N, Meintani A, Kapetsis G, Chatzigiannidou-Florou C, Tsantikidi A, Maxouri S, Tsaousis G, et al. Liquid Biopsy Testing in a Greek Cohort of ER-positive, HER2-negative metastatic breast cancer patients. <em>Cancer Research (SABCS 2024)</em>. Abstract PO5-04-13.</div>
+      </div>
+
+      <div class="conf-year-group">
+        <div class="conf-year-label">2022</div>
+        <div class="conf-text">Tsoulos N, Agiannitopoulos K, Pepe G, Papadopoulou E, Tsaousis GN, Apostolopoulou D, et al. Different CNVs account for 10.4% of pathogenic variants in 1418 patients referred for hereditary breast cancer testing. <em>Cancer Research (SABCS 2022)</em>. Abstract P2-09-10.</div>
+        <div class="conf-text">Papadopoulou E, Tsoulos N, Metaxa-Mariatou V, Tsantikidi A, Kapetsis G, Florou-Chatzigiannidou C, Tsaousis G, et al. Comprehensive tumor analysis by NGS in metastatic breast cancer patients. <em>Cancer Research (SABCS 2022)</em>. Abstract P5-13-01.</div>
+        <div class="conf-text">Ziogas D, Agiannitopoulos K, Pepe G, Potska K, Tsaousis G, Apostolopoulou D, Tsoulos N, Venizelos V, Markopoulos C, et al. 1709P Cascade genetic testing utilized only in 31% of initial families with pathogenic variants in breast cancer genes. <em>Annals of Oncology (ESMO 2022)</em>.</div>
+      </div>
+
+      <div class="conf-year-group">
+        <div class="conf-year-label">2020</div>
+        <div class="conf-text">Agiannitopoulos K, Pepe G, Papadopoulou E, Tsaousis G, Kampouri S, Maravelaki S, Fassas A, Christodoulou C, Iosifidou R, et al. Splicing variants in hereditary cancer genes: clinical utility of functional RNA analysis. <em>European Journal of Human Genetics (ESHG Virtual 2020)</em>. P12.158.A.</div>
+      </div>
+
+      <div class="conf-year-group">
+        <div class="conf-year-label">2019</div>
+        <div class="conf-text">Tsaousis GN, Tsoulos N, Papadopoulou E, Agiannitopoulos K, Pepe G, Diamantopoulos N, Floros TI, Iosifidou R, Markopoulos C, Papazisis K, Venizelos V, Xepapadakis G, Banu E, Eniu DT, Stanculeanu D, Ungureanu A, Tansan S, Tekinel M, Yalcin S, Nasioulas G. Multigene panel testing results for hereditary breast cancer in 1325 individuals: Implications for gene selection and considerations for guidelines. <em>Annals of Oncology (ESMO 2019)</em> 30(suppl_5): v25–v54. doi:10.1093/annonc/mdz239.</div>
+      </div>
+
+      <div class="conf-year-group">
+        <div class="conf-year-label">2018</div>
+        <div class="conf-text">Tsoulos N, Apessos A, Agiannitopoulos K, Pepe G, Tsaousis G, Kambouri S, Eniu DT, Ungureanu A, Banu E, Ciule L, et al. Analysis of hereditary cancer syndromes by use of a panel of genes: More answers than questions. <em>Cancer Research (SABCS 2018)</em>. Abstract P3-03-03.</div>
+      </div>
+
+      <div class="conf-year-group">
+        <div class="conf-year-label">2013</div>
+        <div class="conf-text">Theodoropoulou MC, Tsaousis GN, Litou ZI, Bagos PG, Hamodrakas SJ. GPCRpipe: A pipeline for the detection of G-protein coupled receptors in proteomes. <em>Joint 21st ISMB / 12th ECCB</em>, Berlin, Germany.</div>
+      </div>
+
+    </div><!-- end conferences -->
+  </div>
+</section>
+
+<!-- PROFILES -->
+<section class="profiles" id="profiles">
+  <div class="sec-eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">Find me online</span></div>
+  <h2>Academic profiles</h2>
+  <div class="profiles-wrap reveal">
+    <a href="http://orcid.org/0000-0002-8975-8779" class="profile-link" target="_blank" rel="noopener"><span class="pdot"></span>ORCID</a>
+    <a href="https://scholar.google.gr/citations?user=9b9AhIQAAAAJ&hl=en" class="profile-link" target="_blank" rel="noopener"><span class="pdot"></span>Google Scholar</a>
+    <a href="https://gr.linkedin.com/in/gtsaousis" class="profile-link" target="_blank" rel="noopener"><span class="pdot"></span>LinkedIn</a>
+    <a href="https://www.researchgate.net/profile/Georgios_Tsaousis" class="profile-link" target="_blank" rel="noopener"><span class="pdot"></span>ResearchGate</a>
+    <a href="http://www.scopus.com/authid/detail.url?authorId=35485884900" class="profile-link" target="_blank" rel="noopener"><span class="pdot"></span>Scopus</a>
+    <a href="https://clinicalgenome.org/about/people/staff/tsaousis-4558" class="profile-link" target="_blank" rel="noopener"><span class="pdot"></span>ClinGen</a>
+    <a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=((Tsaousis+Georgios+[Author])+AND+((University+of+Athens[Affiliation])+OR+(GeneKor[Affiliation])))" class="profile-link" target="_blank" rel="noopener"><span class="pdot"></span>PubMed</a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="sec-eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">Get in touch</span></div>
+  <h2>Contact</h2>
+  <div class="contact-grid reveal">
+    <div class="contact-text">Open to scientific collaborations, peer review requests, and discussions on clinical genomics, bioinformatics pipeline development, or AI applications in oncology. Feel free to reach out via LinkedIn or email.</div>
+    <div class="contact-rows">
+      <div><div class="c-row-label">Affiliation</div><div class="c-row-val">Department of Bioinformatics and AI Applications, Genekor Medical SA, Athens, Greece</div></div>
+      <div><div class="c-row-label">LinkedIn</div><div class="c-row-val"><a href="https://gr.linkedin.com/in/gtsaousis" target="_blank" rel="noopener">linkedin.com/in/gtsaousis</a></div></div>
+      <div><div class="c-row-label">ORCID</div><div class="c-row-val"><a href="http://orcid.org/0000-0002-8975-8779" target="_blank" rel="noopener">0000-0002-8975-8779</a></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-name">Georgios N. Tsaousis</span>
+  <span>Group Leader of Bioinformatics · Genekor Medical SA · Athens, Greece</span>
+  <span>© 2026</span>
+</footer>
+
+<script>
+  function toggleMenu() { document.getElementById('navLinks').classList.toggle('open'); }
+  document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open')));
+  const obs = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  function showTab(name, btn) {
+    document.querySelectorAll('.pub-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.pub-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    btn.classList.add('active');
+  }
+</script>
+</body>
+</html>
