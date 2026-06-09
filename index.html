@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="description" content="Georgios N. Tsaousis — Bioinformatics Group Leader, Clinical Genomics Researcher, and Lecturer specialising in NGS, precision oncology, and translational genomics.">
 <title>Georgios N. Tsaousis | Clinical Genomics & Bioinformatics</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,7 +26,7 @@
     --white: #ffffff;
   }
   html { scroll-behavior: smooth; }
-  body { font-family: 'Inter', sans-serif; font-weight: 300; background: var(--cream); color: var(--ink); overflow-x: hidden; font-size: 15.5px; line-height: 1.7; }
+  body { font-family: 'Inter', sans-serif; font-weight: 300; background: var(--cream); color: var(--ink); overflow-x: hidden; font-size: 15.5px; line-height: 1.7; -webkit-text-size-adjust: 100%; }
 
   /* ── NAV ── */
   nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1rem 2.8rem; background: rgba(247,246,242,0.94); backdrop-filter: blur(16px); border-bottom: 1px solid var(--rule); animation: fadeDown 0.7s ease both; }
@@ -49,7 +49,7 @@
   .eyebrow-text { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal); }
   h1 { font-family: 'Syne', sans-serif; font-size: clamp(2.6rem, 4.5vw, 4rem); font-weight: 700; line-height: 1.08; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
   h1 .name-last { color: var(--teal); display: block; }
-  .hero-role { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.08em; color: var(--ink-muted); margin-bottom: 1.8rem; text-transform: uppercase; }
+  .hero-role { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.08em; color: var(--ink-muted); margin-bottom: 1.8rem; text-transform: uppercase; overflow-wrap: break-word; }
   .hero-bio { font-size: 1rem; color: var(--ink-soft); max-width: 44ch; margin-bottom: 2.5rem; line-height: 1.8; }
   .hero-bio strong { color: var(--ink); font-weight: 500; }
   .hero-ctas { display: flex; gap: 0.8rem; flex-wrap: wrap; }
@@ -173,27 +173,88 @@
   /* ── RESPONSIVE ── */
   @media (max-width: 960px) {
     nav { padding: 1rem 1.5rem; }
-    .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--cream); border-bottom: 1px solid var(--rule); padding: 1rem 1.5rem; gap: 1.2rem; }
+    .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--cream); border-bottom: 1px solid var(--rule); padding: 1rem 1.5rem; gap: 1.2rem; z-index: 99; }
     .nav-links.open { display: flex; }
     .nav-hamburger { display: flex; }
-    .hero { grid-template-columns: 1fr; padding: 6.5rem 1.5rem 3rem; min-height: auto; gap: 2.5rem; }
+    .hero { grid-template-columns: 1fr; padding: 6rem 1.5rem 3rem; min-height: auto; gap: 2rem; }
     .hero-grid-bg { display: none; }
-    section { padding: 4rem 1.5rem; }
+    .hero-mesh { display: none; }
+    section { padding: 3.5rem 1.5rem; }
     .focus-grid { grid-template-columns: 1fr 1fr; }
     .focus-item { border-right: none; border-bottom: 1px solid var(--rule); }
     .focus-item:nth-child(odd) { border-right: 1px solid var(--rule); }
     .focus-item:last-child { border-bottom: none; }
     .focus-item:nth-last-child(2):nth-child(odd) { border-bottom: none; }
     .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-    footer { flex-direction: column; text-align: center; }
+    footer { flex-direction: column; text-align: center; gap: 0.4rem; }
   }
+
   @media (max-width: 600px) {
-    h1 { font-size: 2.3rem; }
+    nav { padding: 0.9rem 1.2rem; }
+    h1 { font-size: 2.1rem; }
+    h2 { font-size: 1.7rem; margin-bottom: 2rem; }
+    .hero { padding: 5.5rem 1.2rem 2.5rem; gap: 1.8rem; }
+    .hero-eyebrow { margin-bottom: 1rem; }
+    .eyebrow-text { font-size: 0.58rem; }
+    .hero-role { font-size: 0.62rem; letter-spacing: 0.06em; margin-bottom: 1.2rem; }
+    .hero-bio { font-size: 0.92rem; margin-bottom: 1.8rem; max-width: 100%; }
+    .hero-ctas { gap: 0.6rem; }
+    .btn { padding: 0.65rem 1.2rem; font-size: 0.6rem; }
+    section { padding: 3rem 1.2rem; }
+
+    /* Stats panel: 2 cards per row, dark card full width */
     .stats-panel { grid-template-columns: 1fr 1fr; }
-    .pub-item { grid-template-columns: 1.8rem 1fr; }
+    .stat-card { padding: 1.2rem; }
+    .stat-num { font-size: 1.8rem; }
+    .stat-num sup { font-size: 0.9rem; }
+    .stat-lbl { font-size: 0.55rem; }
+    .stat-card.dark { padding: 1.2rem; }
+    .stat-card.dark .stat-text { font-size: 0.8rem; }
+
+    /* Focus grid: single column on small screens */
     .focus-grid { grid-template-columns: 1fr; }
-    .focus-item { border-right: none !important; border-bottom: 1px solid var(--rule); }
+    .focus-item { border-right: none !important; border-bottom: 1px solid var(--rule); padding: 1.8rem 1.2rem; }
     .focus-item:last-child { border-bottom: none; }
+
+    /* Timeline: tighter on mobile */
+    .timeline { padding-left: 1rem; }
+    .tl-item { padding-left: 1.5rem; margin-bottom: 2rem; }
+    .tl-dot { width: 8px; height: 8px; left: -4px; }
+    .tl-title { font-size: 0.98rem; }
+    .tl-org { font-size: 0.78rem; }
+    .tl-desc { font-size: 0.82rem; }
+
+    /* Publications */
+    .pub-tabs { gap: 0; }
+    .pub-tab { padding: 0.65rem 0.9rem; font-size: 0.58rem; }
+    .pub-item { grid-template-columns: 1.6rem 1fr; gap: 0.7rem; padding: 1rem 0; }
+    .pub-item:hover { margin: 0; padding-left: 0; padding-right: 0; }
+    .pub-title { font-size: 0.86rem; }
+    .pub-meta { font-size: 0.58rem; }
+    .pub-search-wrap { max-width: 100%; }
+
+    /* Profiles */
+    .profiles-wrap { gap: 0.5rem; }
+    .profile-link { font-size: 0.6rem; padding: 0.5rem 0.85rem; }
+
+    /* Contact */
+    .contact-grid { gap: 2rem; }
+    .contact-text { font-size: 0.9rem; }
+
+    /* Footer */
+    footer { padding: 1.5rem 1.2rem; font-size: 0.55rem; }
+    .footer-name { font-size: 0.82rem; }
+
+    /* Conference abstracts */
+    .conf-text { font-size: 0.82rem; }
+    .conf-year-label { font-size: 1rem; }
+  }
+
+  @media (max-width: 380px) {
+    h1 { font-size: 1.85rem; }
+    .stats-panel { grid-template-columns: 1fr; }
+    .stat-card.dark { grid-column: span 1; }
+    .btn { padding: 0.6rem 1rem; }
   }
 
   /* ── PUB SEARCH ── */
@@ -247,7 +308,7 @@
       <div class="stat-card"><div class="stat-num">Biocurator</div><div class="stat-lbl">ClinGen</div></div>
       <div class="stat-card"><div class="stat-num">45<sup>+</sup></div><div class="stat-lbl">Journal papers</div></div>
       <div class="stat-card"><div class="stat-num">PhD</div><div class="stat-lbl">Bioinformatics, NKUA</div></div>
-      <div class="stat-card"><div class="stat-num">888<sup>+</sup></div><div class="stat-lbl">Citations</div></div>
+      <div class="stat-card"><div class="stat-num">890<sup>+</sup></div><div class="stat-lbl">Citations</div></div>
       <div class="stat-card dark">
         <div><div class="stat-lbl">Affiliations</div><div class="stat-text"><strong>GeneKor Medical SA</strong> · Group Leader of Bioinformatics<br>Elected Board Member ·  Hellenic Society for Computational Biology & Bioinformatics (HSCBB)</div></div>
         <div class="stat-arrow">→</div>
