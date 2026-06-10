@@ -35,6 +35,7 @@
   .nav-links { display: flex; gap: 2rem; list-style: none; }
   .nav-links a { font-family: 'JetBrains Mono', monospace; font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); text-decoration: none; transition: color 0.2s; }
   .nav-links a:hover { color: var(--teal); }
+  .nav-links a.active { color: var(--teal); font-weight: 500; border-bottom: 2px solid var(--teal); padding-bottom: 2px; }
   .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
   .nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--ink); transition: all 0.3s; }
 
@@ -296,7 +297,7 @@
     <div class="hero-eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">Clinical Genomics · Bioinformatics</span></div>
     <h1>Georgios <span class="name-last">Tsaousis</span></h1>
     <p class="hero-role">PhD &nbsp;·&nbsp; Group Leader of Bioinformatics &nbsp;·&nbsp; Lecturer</p>
-    <p class="hero-bio">Bridging <strong>computational biology</strong> and <strong>clinical diagnostics</strong> across oncology, cardiology, and neurology. Over 15 years building NGS pipelines, translating genomic data into actionable clinical insight, and training the next generation of bioinformaticians.</p>
+    <p class="hero-bio">Bridging <strong>computational biology</strong> and <strong>clinical diagnostics</strong> across oncology, cardiology, and neurology. Over 10 years building NGS pipelines, translating genomic data into actionable clinical insight, and training the next generation of bioinformaticians.</p>
     <div class="hero-ctas">
       <a href="#publications" class="btn btn-primary">Publications</a>
       <a href="https://scholar.google.gr/citations?user=9b9AhIQAAAAJ&hl=en" class="btn btn-outline" target="_blank" rel="noopener">Google Scholar</a>
@@ -563,6 +564,28 @@
   // Mobile nav
   function toggleMenu() { document.getElementById('navLinks').classList.toggle('open'); }
   document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open')));
+
+// Active nav highlighting
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+
+const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            // Remove active from all links
+            navLinks.forEach(link => link.classList.remove('active'));
+            // Add active to the matching link
+            const id = entry.target.getAttribute('id');
+            const activeLink = document.querySelector(`.nav-links a[href="#${id}"]`);
+            if (activeLink) activeLink.classList.add('active');
+        }
+    });
+}, {
+    threshold: 0.1,
+    rootMargin: '-80px 0px -80px 0px'
+});
+
+sections.forEach(section => navObserver.observe(section));
 
   // Scroll reveal
   const obs = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.08 });
