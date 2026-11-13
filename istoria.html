@@ -62,6 +62,17 @@ summary::before{content:"▸";transition:transform .15s}
 details[open] summary::before{transform:rotate(90deg)}
 details ol{margin:6px 0 2px;padding-left:22px;display:grid;gap:3px;font-size:.88rem;color:var(--cream)}
 .unit.soon details ol{color:var(--muted)}
+.unit.isnew{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold),0 6px 22px rgba(242,196,109,.18)}
+.newtag{display:inline-block;margin-left:8px;padding:2px 9px;border-radius:99px;background:var(--gold);color:var(--glaze);font-size:.68rem;font-weight:700;letter-spacing:.12em;vertical-align:2px;animation:shine 2.4s ease-in-out infinite}
+@keyframes shine{0%,100%{box-shadow:0 0 0 0 rgba(242,196,109,.0)}50%{box-shadow:0 0 0 6px rgba(242,196,109,.25)}}
+.news{display:flex;align-items:center;gap:12px;margin-top:18px;padding:12px 14px;border-radius:16px;border:2px dashed var(--gold);background:var(--glaze-2);text-decoration:none;color:var(--cream)}
+.news:hover{border-style:solid}
+.news .ic{font-size:1.6rem;flex:none}
+.news .tx{display:grid;gap:2px;min-width:0}
+.news .tx small{font-size:.72rem;font-weight:700;letter-spacing:.12em;color:var(--gold)}
+.news .tx b{font-size:1rem}
+.news .go{margin-left:auto;color:var(--gold);font-size:1.3rem;flex:none}
+@media (prefers-reduced-motion:reduce){.newtag{animation:none}}
 .note{margin-top:30px;padding:14px 16px;border-radius:14px;border:1.5px dashed var(--line);font-size:.86rem;color:var(--muted);text-align:center;line-height:1.55}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
@@ -91,7 +102,7 @@ const UNITS = [
  lessons:['Η Τιτανομαχία','Οι θεοί του Ολύμπου','Οι θεές του Ολύμπου','Ο Προμηθέας, η Πανδώρα, ο Δευκαλίωνας και η Πύρρα']},
 {n:2, part:1, title:'Ο Ηρακλής', href:'E2_hercules_plus.html', img:'u2', keys:['irakleis-best'], max:27, extra:'+ Το ταξίδι του Ηρακλή',
  lessons:['Η γέννηση του Ηρακλή','Το λιοντάρι της Νεμέας','Η Λερναία Ύδρα και ο κάπρος του Ερύμανθου','Το ελάφι με τα χρυσά κέρατα, οι Στυμφαλίδες όρνιθες, οι στάβλοι του Αυγεία','Κι άλλοι άθλοι','Ο Κέρβερος του Άδη και τα χρυσά μήλα των Εσπερίδων','Το τέλος του Ηρακλή']},
-{n:3, part:1, title:'Ο Θησέας', href:'E3_theseus.html', img:'u3', keys:['theseas-best'], max:18, extra:'+ Το ταξίδι του Θησέα',
+{n:3, part:1, title:'Ο Θησέας', href:'E3_theseus.html', added:'2026-11-13', img:'u3', keys:['theseas-best'], max:18, extra:'+ Το ταξίδι του Θησέα',
  lessons:['Θησέας, το βασιλόπουλο της Τροιζήνας','Ο Θησέας σκοτώνει τον Μινώταυρο','Ο Θησέας επιστρέφει στην Αθήνα']},
 {n:4, part:1, title:'Η Αργοναυτική εκστρατεία', href:null,
  lessons:['Ο Φρίξος, η Έλλη και το χρυσόμαλλο δέρας','Πελίας και Ιάσονας','Η Αργοναυτική εκστρατεία']},
@@ -118,6 +129,14 @@ function stars(u){
   });
   return best;
 }
+const NEW_DAYS = 21;
+function seen(){ try { return JSON.parse(localStorage.getItem('istoria-seen') || '[]'); } catch(e){ return []; } }
+function markSeen(n){ try { const v = seen(); if (!v.includes(n)) { v.push(n); localStorage.setItem('istoria-seen', JSON.stringify(v)); } } catch(e){} }
+function isNew(u){
+  if (!u.href || !u.added) return false;
+  const days = (Date.now() - new Date(u.added + 'T00:00:00').getTime()) / 864e5;
+  return days >= 0 && days < NEW_DAYS && !seen().includes(u.n) && !stars(u);
+}
 function card(u){
   const lessons = `<details><summary>${u.lessons.length} μαθήματα</summary><ol>${u.lessons.map(l => `<li>${esc(l)}</li>`).join('')}</ol></details>`;
   if (!u.href) return `
@@ -128,11 +147,11 @@ function card(u){
     </div>`;
   const s = stars(u);
   return `
-    <a class="unit ready" href="${esc(u.href)}">
+    <a class="unit ready${isNew(u) ? ' isnew' : ''}" href="${esc(u.href)}" data-n="${u.n}">
       <div class="med" aria-hidden="true"><img src="${THUMB[u.img]}" alt=""><span class="badge">${u.n}</span></div>
       <div class="info">
         <div class="eyebrow">Ενότητα ${u.n}</div>
-        <div class="ttl">${esc(u.title)}</div>
+        <div class="ttl">${esc(u.title)}${isNew(u) ? '<span class="newtag">ΝΕΟ</span>' : ''}</div>
         ${u.extra ? `<div class="meta">${esc(u.extra)}</div>` : ''}
         <div class="state ${s ? 'stars' : ''}">${s ? `★ ${s} από ${u.max} αστέρια` : 'Παίξε τώρα ➜'}</div>
       </div>
@@ -144,7 +163,10 @@ const out = [];
   UNITS.filter(u => u.part === p).forEach(u => out.push(card(u)));
   out.push('</div>');
 });
-document.getElementById('units').innerHTML = out.join('');
+const fresh = UNITS.filter(isNew).sort((a, b) => b.n - a.n)[0];
+const news = fresh ? `<a class="news" href="${esc(fresh.href)}" data-n="${fresh.n}"><span class="ic" aria-hidden="true">🎉</span><span class="tx"><small>ΜΟΛΙΣ ΠΡΟΣΤΕΘΗΚΕ</small><b>Ενότητα ${fresh.n} · ${esc(fresh.title)}</b></span><span class="go" aria-hidden="true">➜</span></a>` : '';
+document.getElementById('units').innerHTML = news + out.join('');
+document.getElementById('units').addEventListener('click', e => { const a = e.target.closest('a[data-n]'); if (a) markSeen(+a.dataset.n); });
 </script>
 
 </body>
